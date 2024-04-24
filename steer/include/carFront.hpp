@@ -37,8 +37,8 @@
 #define SPI_CMD_READ_RPM            0x51
 #define SPI_CMD_READ_US_DISTANCE    0x52
 
-void* carFront_init(void * arg);
-void* carFront_deinit(void * arg);
-void* carFront_job(void * arg);
+int carFront_init();
+void* carFront_deinit();
+bool setSteering(double val_deg);
 
 #endif //SENSOR_FRONT_H
