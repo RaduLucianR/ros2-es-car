@@ -18,9 +18,30 @@ add_executable(steering
 )
 ament_target_dependencies(steering rclcpp std_msgs)
 
+add_executable(throttle
+               src/throttle.cpp
+               src/carBack.cpp
+               src/spidriver.cpp
+)
+ament_target_dependencies(throttle rclcpp std_msgs)
+
+add_executable(ultrasonic_front
+               src/ulson_front.cpp
+               src/carFront.cpp
+               src/spidriver.cpp
+)
+ament_target_dependencies(ultrasonic_front rclcpp std_msgs)
+
 install(TARGETS
   steering
+  throttle
+  ultrasonic_front
   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 ament_package()

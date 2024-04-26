@@ -40,5 +40,6 @@
 int carFront_init();
 void* carFront_deinit();
 bool setSteering(double val_deg);
+bool getDistance(double dist[2]);
 
 #endif //SENSOR_FRONT_H

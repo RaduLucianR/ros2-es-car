@@ -16,6 +16,7 @@
 #include <signal.h>
 #include <pthread.h> 
 
+#include "rcutils/logging_macros.h"
 #include "spidriver.hpp"
 #include "carFront.hpp"
 
@@ -92,5 +93,29 @@ bool setSteering(double val_deg) {
   write(spi_fd, &value, 1);
   pthread_mutex_unlock(&spi_mutex);
 
+  return retval;
+}
+
+bool getDistance(double dist[2]) {
+  bool retval = true;
+
+  uint8_t payload = SPI_CMD_READ_US_DISTANCE;
+  uint8_t data[4];
+
+  uint16_t sensorValue1, sensorValue2;
+
+  pthread_mutex_lock(&spi_mutex);
+  write(spi_fd, &payload, 1);
+  SPI_read(spi_fd, data, 4);
+  pthread_mutex_unlock(&spi_mutex);
+
+  sensorValue1 = data[0] | (data[1] << 8);
+  sensorValue2 = data[2] | (data[3] << 8);
+  
+  dist[0] = (double)sensorValue1 / 100.0;
+  dist[1] = (double)sensorValue2 / 100.0;
+  //CAR_FRONT_PRINT_INFO("Distance Left -> %lf m", (double)sensorValue2 / 100.0);
+  //CAR_FRONT_PRINT_INFO("Distance Right -> %lf m", (double)sensorValue2 / 100.0);
+  RCUTILS_LOG_INFO("Ciao %lf %lf", dist[0], dist[1]);
   return retval;
 }
