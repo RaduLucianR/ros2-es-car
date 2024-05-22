@@ -35,8 +35,6 @@ class UltrasonicFront : public rclcpp::Node
 
 	getDistance(dist); 
 	message.data = dist[0];
-
-    	RCLCPP_INFO(this->get_logger(), "Left: %lf m", dist[0]);
     	publisher1_->publish(message);
     }
 
@@ -50,8 +48,6 @@ class UltrasonicFront : public rclcpp::Node
 
         getDistance(dist); 
         message.data = dist[1];
-
-        RCLCPP_INFO(this->get_logger(), "Right: %lf m", dist[1]);
         publisher2_->publish(message);
     }
 
@@ -60,7 +56,7 @@ class UltrasonicFront : public rclcpp::Node
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  carFront_init();
+  carFront_init(0, 0);
   rclcpp::spin(std::make_shared<UltrasonicFront>());
   rclcpp::shutdown();
   return 0;

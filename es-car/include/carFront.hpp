@@ -37,7 +37,7 @@
 #define SPI_CMD_READ_RPM            0x51
 #define SPI_CMD_READ_US_DISTANCE    0x52
 
-int carFront_init();
+int carFront_init(int spi, int cs);
 void* carFront_deinit();
 bool setSteering(double val_deg);
 bool getDistance(double dist[2]);

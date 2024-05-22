@@ -37,8 +37,8 @@ static int spi_fd;
 static bool initialized = false;
 static pthread_mutex_t spi_mutex;
 
-int carBack_init() {
-  spi_fd = SPI_open(0, 1);
+int carBack_init(int spi, int cs) {
+  spi_fd = SPI_open(spi, cs);
   if (spi_fd < 0) {
       CAR_BACK_PRINT_ERROR("Could not open SPI bus %s", SPI_PATH);
       return 1;

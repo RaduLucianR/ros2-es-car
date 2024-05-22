@@ -11,6 +11,14 @@ find_package(std_msgs REQUIRED)
 
 include_directories(include)
 
+add_executable(carstartup
+               src/carstartup.cpp
+               src/carFront.cpp
+               src/spidriver.cpp
+)
+ament_target_dependencies(carstartup rclcpp std_msgs)
+
+
 add_executable(steering
 	       src/steering.cpp
                src/carFront.cpp
@@ -36,6 +44,7 @@ install(TARGETS
   steering
   throttle
   ultrasonic_front
+  carstartup
   DESTINATION lib/${PROJECT_NAME}
 )
 

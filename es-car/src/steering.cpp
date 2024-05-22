@@ -25,9 +25,7 @@ class Steering : public rclcpp::Node
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  carFront_init();
-  fflush(stdout);
-  fflush(stderr);
+  carFront_init(0, 0);
   rclcpp::spin(std::make_shared<Steering>());
   rclcpp::shutdown();
   return 0;

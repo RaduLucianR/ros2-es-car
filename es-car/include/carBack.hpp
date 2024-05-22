@@ -36,7 +36,7 @@
 #define SPI_CMD_SET_ESC             0x60
 #define SPI_CMD_READ_US_DISTANCE    0x61
 
-int carBack_init();
+int carBack_init(int spi, int cs);
 void* carBack_deinit();
 bool setEsc(double val_percent);
 

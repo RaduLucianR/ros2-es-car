@@ -16,7 +16,6 @@
 #include <signal.h>
 #include <pthread.h> 
 
-#include "rcutils/logging_macros.h"
 #include "spidriver.hpp"
 #include "carFront.hpp"
 
@@ -41,8 +40,8 @@ static int spi_fd;
 static bool initialized = false;
 static pthread_mutex_t spi_mutex;
 
-int carFront_init() {
-  spi_fd = SPI_open(0, 0); // ######## WARNING #######: this is (1, 0) in the OG code
+int carFront_init(int spi, int cs) {
+  spi_fd = SPI_open(spi, cs); // ######## WARNING #######: this is (1, 0) in the OG code
   
   if (spi_fd < 0) {
       CAR_FRONT_PRINT_ERROR("Could not open SPI bus %s", SPI_PATH);
@@ -116,6 +115,6 @@ bool getDistance(double dist[2]) {
   dist[1] = (double)sensorValue2 / 100.0;
   //CAR_FRONT_PRINT_INFO("Distance Left -> %lf m", (double)sensorValue2 / 100.0);
   //CAR_FRONT_PRINT_INFO("Distance Right -> %lf m", (double)sensorValue2 / 100.0);
-  RCUTILS_LOG_INFO("Ciao %lf %lf", dist[0], dist[1]);
+  
   return retval;
 }
