@@ -6,6 +6,9 @@ Currently (06-06-24), the repository has 2 packages:
 1. **es_car** - the *main* package, with all the functionality
 2. **es_car_inter** - the "interfaces" package, currently (06-06-24) only with custom messages. In the future, services and more messages can be added. The reason for having a separate package for interfaces is ROS2 itself, which prefers this structure, mainly because it's easier to import the interfaces in other packages.
 
+### ROS2 architecture
+![ros2 (1)](https://github.com/RaduLucianR/ros2-es-car/assets/57638808/061b6593-6808-475f-bfcd-43b5b3786b0a)
+
 
 ### Start-up
 After the package installation the system may be started as follows.
